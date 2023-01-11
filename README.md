@@ -1,4 +1,4 @@
-# dwm-forest-theme-complete
+# My DWM theme
 The DWM theme that I like to use most of the time.
 
 **Disclaimer:**  DWM is a project by suckless.org, the only code I have written here is for the dwmbar script
