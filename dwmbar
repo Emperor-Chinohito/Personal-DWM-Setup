@@ -7,24 +7,23 @@
 #The power() function determines the battery percentage
 power()
 {
-	if [ -d /sys/class/power_supply/BAT0/status ]; then
-        	echo -e "Battery Status Unavailable"
-	else
-		STAT=$(cat /sys/class/power_supply/BAT0/status)
-		PWR=$(cat /sys/class/power_supply/BAT0/capacity)
-		echo -e "Battery: $PWR% ($STAT)"
-	fi
+        if [ -d /sys/class/power_supply/BAT0/status ]; then
+                echo -e "Battery Status Unavailable"
+        else
+                STAT=$(cat /sys/class/power_supply/BAT0/status)
+                PWR=$(cat /sys/class/power_supply/BAT0/capacity)
+                echo -e "$PWR% ($STAT)"
+        fi
 }
 
 RAM()
 {
         RAM=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
-        echo -e "RAM: $RAM"
+        echo -e "$RAM"
 }
 
 #This while loop updates the statusbar in dwm
 while true; do
-        xsetroot -name "| $(RAM) | $(power) | Date: $(date '+%Y-%m-%d') | Time: $(date +%H:%M) |"
+        xsetroot -name "| $(RAM) | $(power) | $(date '+%A, %B %d %Y') | $(date +%H:%M) |"
         sleep 1s                #The bar updates every second (without this it would constantly update, taking up resources)
 done &
-
